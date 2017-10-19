@@ -12,12 +12,13 @@ def choose_dir():
 	return dir
 
 
-def file_worker(file_name, i):
+def file_worker(paths,file, i):
 	# sys.stdout.write('\r %6i:  %s%s ' % (i, file_name, ' ' * (100 - len(file_name)) ))
 	global mask
 	global f_count
+	file_name = os.path.join(paths,file)
 	if mask.search(file_name) :
-		# print(file_name)
+		print(file_name)
 		f_count+=1
 	else:
 		print(file_name)
@@ -33,8 +34,9 @@ def dir_walker(dir):
 	for paths, dirs, files in os.walk(dir):
 		for file in files:
 			i += 1
-			file_name = os.path.join(paths,file)
-			file_worker(file_name, i)
+			# file_name = os.path.join(paths,file)
+			# file_worker(file_name, i)
+			file_worker(paths,file, i)
 	print('\n\n Total:' + str(i) + ' files')
 	print(' Found: ' + str(f_count) + ' files', end ='\r')	
 
